@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Collaborative Movie Collection</title>
+    <style>
+        :root {
+            --color-drama: #3498db;
+            --color-crime: #e74c3c;
+            --color-action: #2ecc71;
+            --color-sci-fi: #9b59b6;
+            --color-biography: #f39c12;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .genre-section {
+            margin-bottom: 30px;
+            border-left: 5px solid;
+            padding-left: 15px;
+        }
+
+        .genre-section h2 {
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 1.2em;
+            color: red;
+        }
+
+        .movie-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .movie-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ecf0f1;
+            transition: background-color 0.3s ease;
+        }
+
+        .movie-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .movie-title {
+            font-weight: bold;
+            flex-grow: 1;
+        }
+
+        .movie-year {
+            color: #7f8c8d;
+            margin-left: 10px;
+            font-size: 0.9em;
+        }
+
+        .movie-director {
+            color: #95a5a6;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        /* Genre-specific colors */
+        .genre-Drama { border-color: var(--color-drama); }
+        .genre-Crime { border-color: var(--color-crime); }
+        .genre-Action { border-color: var(--color-action); }
+        .genre-SciFi { border-color: var(--color-sci-fi); }
+        .genre-Biography { border-color: var(--color-biography); }
+
+        .genre-section h2::before {
+            content: '';
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        .genre-Drama h2::before { background-color: var(--color-drama); }
+        .genre-Crime h2::before { background-color: var(--color-crime); }
+        .genre-Action h2::before { background-color: var(--color-action); }
+        .genre-SciFi h2::before { background-color: var(--color-sci-fi); }
+        .genre-Biography h2::before { background-color: var(--color-biography); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Collaborative Movie Collection</h1>
+        <div id="movieContainer"></div>
+    </div>
+
+    <script>
+        // Utility function to create valid CSS class name
+        function sanitizeClassName(input) {
+            // Replace spaces and special characters, convert to camelCase
+            return input
+                .replace(/[^\w\s]/g, '')  // Remove special characters
+                .replace(/\s+/g, ' ')     // Normalize whitespace
+                .split(' ')               // Split into words
+                .map((word, index) => 
+                    index === 0 ? 
+                    word.toLowerCase() : 
+                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                )
+                .join('');
+        }
+
+        async function renderMovies() {
+            try {
+                // Fetch movies with cache busting
+                const response = await fetch(`movies.md?_=${Date.now()}`);
+                const markdown = await response.text();
+                
+                const movieContainer = document.getElementById('movieContainer');
+                movieContainer.innerHTML = ''; // Clear existing content
+                
+                // Parse movies
+                const movies = markdown.split('\n')
+                    .filter(line => line.trim().startsWith('- '))
+                    .map(line => {
+                        const [title, genreYear, director] = line.replace('- ', '').trim().split(' - ');
+                        const [genre, year] = genreYear.split(', ');
+                        return { title, genre, year, director };
+                    });
+                
+                // Group movies by genre
+                const moviesByGenre = movies.reduce((acc, movie) => {
+                    // Use sanitized genre for key
+                    const sanitizedGenre = movie.genre.replace('-', ' ');
+                    if (!acc[sanitizedGenre]) {
+                        acc[sanitizedGenre] = [];
+                    }
+                    acc[sanitizedGenre].push(movie);
+                    return acc;
+                }, {});
+                
+                // Render genres and movies
+                Object.entries(moviesByGenre)
+                    .sort(([genreA], [genreB]) => genreA.localeCompare(genreB))
+                    .forEach(([genre, genreMovies]) => {
+                        // Create genre section with sanitized class name
+                        const genreSection = document.createElement('div');
+                        const sanitizedClassName = `genre-${sanitizeClassName(genre)}`;
+                        genreSection.classList.add('genre-section', sanitizedClassName);
+                        
+                        // Genre title
+                        const genreTitle = document.createElement('h2');
+                        genreTitle.textContent = genre;
+                        genreSection.appendChild(genreTitle);
+                        
+                        // Movie list
+                        const movieList = document.createElement('ul');
+                        movieList.classList.add('movie-list');
+                        
+                        // Sort movies by year within genre
+                        genreMovies
+                            .sort((a, b) => parseInt(a.year) - parseInt(b.year))
+                            .forEach(movie => {
+                                const movieItem = document.createElement('li');
+                                movieItem.classList.add('movie-item');
+                                
+                                movieItem.innerHTML = `
+                                    <span class="movie-title">${movie.title}</span>
+                                    <span class="movie-year">${movie.year}</span>
+                                    <span class="movie-director">${movie.director.replace('Directed by ', '')}</span>
+                                `;
+                                
+                                movieList.appendChild(movieItem);
+                            });
+                        
+                        genreSection.appendChild(movieList);
+                        movieContainer.appendChild(genreSection);
+                    });
+            } catch (error) {
+                console.error('Error loading movies:', error);
+            }
+        }
+
+        // Initial render
+        renderMovies();
+    </script>
+</body>
+</html>

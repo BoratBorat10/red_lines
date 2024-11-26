@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Renderer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #222;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        li.strikethrough {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+        const markdownContent = `
+# Economy 
+- Credit rating to certain level - no
+- Mandatory war tax - no
+- Restrictions on moving assets abroad - no
+- Foreign currency restrictions - no
+- Other indicators - no
+- Unemployment, inflation, GDP - no
+- The obfuscation of real economic metrics - no
+
+# Freedom of movement 
+- New border regulations - no
+- Changes to passport regime - yes
+- Permanent withdrawal of airlines - no
+- Declaring Closed military Areas on civilian population - no
+- Curfews - no
+
+# Citizenship 
+- Changes to citizenship status - no
+- Revoking citizenships - no
+
+# Internal Security 
+- Applying external security practices domestically, e.g., surveillance - no
+- Establishment of new security agencies - no
+- Direct loyalty to leader, circumventing normal chain of command - no
+- Different set of operating procedures, expanded powers - no
+
+# Press Freedom 
+- Revoking broadcast licenses - no
+- Increasing censorship - no
+
+# Freedom of expression  
+- Personal repercussions for expressing criticism, e.g., job termination - no
+
+# Judicial  
+
+# Norms 
+- Termination of key people, e.g., head of military, Shin Bet, attorney general, defense minister - no
+
+# Corruption 
+
+# Closing of NGOs 
+`;
+
+        function renderMarkdown(md) {
+            const lines = md.split('\n');
+            let html = '';
+            lines.forEach(line => {
+                if (line.startsWith('# ')) {
+                    html += `<h1>${line.slice(2)}</h1>`;
+                } else if (line.startsWith('- ')) {
+                    const isYes = line.endsWith('- yes');
+                    const text = line.slice(2, line.lastIndexOf('-')).trim();
+                    html += `<ul><li class="${isYes ? 'strikethrough' : ''}">${text}</li></ul>`;
+                } else {
+                    html += `<p>${line}</p>`;
+                }
+            });
+            return html;
+        }
+
+        document.getElementById('content').innerHTML = renderMarkdown(markdownContent);
+    </script>
+</body>
+</html>
