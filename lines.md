@@ -1,41 +1,54 @@
 # Economy 
-- Credit rating to certain level - no
-- Mandatory war tax - no
-- Restrictions on moving assets abroad - yes
-- Foreign currency restrictions - no
-- Other indicators - no
-- Unemployment, inflation, GDP - no
-- The obfuscation of real economic metrics - no
 
-# Freedom of movement 
-- New border regulations - no
-- Changes to passport regime - no
-- Permanent withdrawal of airlines - no
-- Declaring Closed military Areas on civilian population - no
-- Curfews - no
+- [x] Credit rating to certain level
+- [x] Mandatory war tax
+- [x] Restrictions on moving assets abroad
+- [ ] Foreign currency restrictions
+- [ ] Other indicators
+- [ ] Unemployment, inflation, GDP
+- [ ] The obfuscation of real economic metrics
+
+# Freedom of Movement 
+
+- [ ] New border regulations
+- [ ] Changes to passport regime
+- [ ] Permanent withdrawal of airlines
+- [ ] Declaring Closed military Areas on civilian population
+- [ ] Curfews
 
 # Citizenship 
-- Changes to citizenship status - no
-- Revoking citizenships - no
+
+- [x] Changes to citizenship status
+- [ ] Revoking citizenships
 
 # Internal Security 
-- Applying external security practices domestically, e.g., surveillance - no
-- Establishment of new security agencies - no
-- Direct loyalty to leader, circumventing normal chain of command - no
-- Different set of operating procedures, expanded powers - no
+
+- [ ] Applying external security practices domestically, e.g., surveillance
+- [ ] Establishment of new security agencies
+- [ ] Direct loyalty to leader, circumventing normal chain of command
+- [ ] Different set of operating procedures, expanded powers
 
 # Press Freedom 
-- Revoking broadcast licenses - no
-- Increasing censorship - no
 
-# Freedom of expression  
-- Personal repercussions for expressing criticism, e.g., job termination - no
+- [ ] Revoking broadcast licenses
+- [ ] Increasing censorship
+
+# Freedom of Expression  
+
+- [ ] Personal repercussions for expressing criticism, e.g., job termination
 
 # Judicial  
 
+- [ ]
+
 # Norms 
-- Termination of key people, e.g., head of military, Shin Bet, attorney general, defense minister - no
 
-# Corruption 
+- [ ] Termination of key people, e.g., head of military, Shin Bet, attorney general, defense minister
 
-# Closing of NGOs 
+# Corruption  
+
+- [ ]
+
+# Closing of NGOs  
+
+- [ ]
