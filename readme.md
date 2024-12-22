@@ -15,6 +15,6 @@ This grabs the data from a file called he_lines.md
 ## Lines File
 
 The line file is fomrnated as follows:
-A Heading 2, that is ##, is used to desginate Categorises.
+A Heading 2, that is ##, is used to designate Categories.
 Then there is a checkbox "- [ ]"
 To fill the checkbox repalce the emplty space with an x: "- [x]"
