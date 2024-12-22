@@ -1,54 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Markdown Renderer</title>
+    <title>Red Lines</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Alef', Arial, sans-serif;
             line-height: 1.6;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #efcdb8;
+            direction: rtl;
+            text-align: right;
         }
-        h1 {
+        h2 {
             color: #333;
             border-bottom: 2px solid #666;
             padding-bottom: 10px;
+            margin-top: 30px;
         }
-        h2 {
+        h3 {
             color: #444;
             margin-top: 20px;
         }
         ul {
             list-style-type: none;
             padding-left: 0;
+            padding-right: 0;
+            margin-right: 0;
         }
+     
         li {
-            background-color: #fff;
+            background-color: #f2a6a6;
             margin-bottom: 10px;
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
+            justify-content: flex-start;
+            text-align: right;
         }
         li::before {
             content: '○';
             margin-right: 10px;
             color: #888;
+            order: 1;
+        }
+        li span {
+            margin-right: 10px;
+            order: 2;
         }
         li.completed {
-            color: #cf1212;
+            color: red;
         }
         li.completed::before {
             content: '✓';
             color: red;
+            order: 1;
         }
         li.completed span {
             text-decoration: line-through;
-            color: #7b0d23;
+            order: 2;
         }
         #error-message {
             color: red;
@@ -56,7 +71,17 @@
             padding: 10px;
             border-radius: 5px;
             margin-top: 20px;
+            text-align: right;
         }
+        input[type=checkbox] {
+            background: #aaa;
+            color: #efcdb8;
+
+
+            box-sizing: border-box;
+  
+        }
+
     </style>
 </head>
 <body>
@@ -68,16 +93,16 @@
         // Function to fetch markdown file
         async function fetchMarkdownFile() {
             try {
-                const response = await fetch('lines.md');
+                const response = await fetch('he_lines.md');
                 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`Error fetching file ${response.status}`);
                 }
                 
                 return await response.text();
             } catch (error) {
                 const errorMessageDiv = document.getElementById('error-message');
-                errorMessageDiv.textContent = `Error loading markdown file: ${error.message}`;
+                errorMessageDiv.textContent = `Error fetching file ${error.message}`;
                 errorMessageDiv.style.display = 'block';
                 return null;
             }

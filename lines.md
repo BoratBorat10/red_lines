@@ -1,14 +1,15 @@
-# Economy 
+## Economy 
 
 - [x] Credit rating to certain level
 - [x] Mandatory war tax
 - [x] Restrictions on moving assets abroad
-- [ ] Foreign currency restrictions
+- [x] Foreign currency restrictions
 - [ ] Other indicators
 - [ ] Unemployment, inflation, GDP
 - [ ] The obfuscation of real economic metrics
 
-# Freedom of Movement 
+
+## Freedom of Movement 
 
 - [ ] New border regulations
 - [ ] Changes to passport regime
@@ -16,39 +17,43 @@
 - [ ] Declaring Closed military Areas on civilian population
 - [ ] Curfews
 
-# Citizenship 
+## Citizenship 
 
 - [x] Changes to citizenship status
 - [ ] Revoking citizenships
 
-# Internal Security 
+## Internal Security 
 
 - [ ] Applying external security practices domestically, e.g., surveillance
 - [ ] Establishment of new security agencies
 - [ ] Direct loyalty to leader, circumventing normal chain of command
 - [ ] Different set of operating procedures, expanded powers
 
-# Press Freedom 
+## Press Freedom 
 
 - [ ] Revoking broadcast licenses
 - [ ] Increasing censorship
+    - [x]  
 
-# Freedom of Expression  
+
+
+
+## Freedom of Expression  
 
 - [ ] Personal repercussions for expressing criticism, e.g., job termination
 
-# Judicial  
+## Judicial  
 
 - [ ]
 
-# Norms 
+## Norms 
 
 - [ ] Termination of key people, e.g., head of military, Shin Bet, attorney general, defense minister
 
-# Corruption  
+## Corruption  
 
-- [ ]
 
-# Closing of NGOs  
+
+## Closing of NGOs  
 
 - [ ]
