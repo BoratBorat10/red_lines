@@ -5,7 +5,7 @@ The site is currently renderd from the file index.html.
 This is the file that website automaticly looks for.
 It is now in a draft version in English.
 The html file grabs data from the file called lines.md
-.md is a Markdown file.
+.md is a [Markdown]([url](https://www.markdownguide.org/basic-syntax/)) file.
 You can read more about this format here.
 
 
